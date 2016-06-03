@@ -1,0 +1,22 @@
+1. Objective
+============
+Boost example code directory.
+
+2. Build
+=========
+* All common variables are available in Makefile.inc
+* make all : builds src and test
+* make library : builds only source code
+* make tests : builds the test cases
+* make clean : cleans BOTH src and test
+* To print a specific Makefile variable
+  make -f <DIR>/Makefile -f helper.mak print-<VAR_NAME> 
+
+3. Variables
+============
+GCC_VERSION
+ARCH
+CFLAGS
+GCOV_FLAGS
+GPROF_FLAGS
+ARFLAGS
