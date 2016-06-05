@@ -5,9 +5,11 @@ OBJS := $(patsubst %.cc,%.o,$(wildcard *.cc))
 all: $(LIB_STATIC) $(LIB_DYN) 
 
 $(LIB_STATIC): $(OBJS) 
+	$(DIR_GUARD) $(LIB_PATH)
 	$(AR) $(ARFLAGS) $@ $^ $(OBJS)
 
 $(LIB_DYN): $(OBJS)
+	$(DIR_GUARD) $(LIB_PATH)
 	$(CXX) $(CXXFLAGS) $(LDLIBFLAGS) -o $@ $^
 	ln -fs $(LIB_DYN) $(LIB_PATH)/lib$(LIB_NAME).so
 

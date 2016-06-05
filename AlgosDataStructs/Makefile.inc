@@ -8,6 +8,7 @@ BASE_PATH=$(PWD)
 INC_PATH= -I $(PWD)/include/
 LIB_PATH=$(PWD)/lib/
 BIN_PATH=$(PWD)/bin/
+DIR_GUARD=@mkdir -p
 
 # Refs : GCC_COMPAT
 GCC_VER_CMP48 :=$(shell (echo `gcc -dumpversion | cut -f1-2 -d.` \>= 4.8 | bc))
