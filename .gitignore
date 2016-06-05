@@ -1,0 +1,5 @@
+AlgosDataStructs/lib/
+BuildTools/bin/
+BuildTools/lib/
+BuildTools/src/base.o
+BuildTools/test/t_base.o
