@@ -34,7 +34,7 @@ LIB_DYN=$(LIB_PATH)/lib$(LIB_NAME).so.$(MAJOR_VERSION).$(MINOR_VERSION).$(RELEAS
 LDLIBFLAGS=$(FPIC) -shared -rdynamic -Wl,-soname,lib$(LIB_NAME).so
 
 ifeq "$(GCC_VER_CMP48)" "1"
-    CFLAGS += -std=c++11
+    CXXFLAGS += -std=c++11
 else
     @echo "Compiling with c++98" 
 endif
