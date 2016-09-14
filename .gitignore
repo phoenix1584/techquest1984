@@ -1,5 +1,8 @@
 AlgosDataStructs/lib/
+AlgosDataStructs/bin/
 AlgosDataStructs/doc/html
+AlgosDataStructs/src/*.o
+AlgosDataStructs/test/*.o
 BuildTools/bin/
 BuildTools/lib/
 BuildTools/src/*.o
@@ -7,4 +10,8 @@ BuildTools/test/*.o
 Boost/lib/
 Boost/bin/
 Boost/*.o
-
+lib/
+Concurrency/bin/
+Concurrency/lib/
+Concurrency/src/*.o
+Concurrency/test/*.o

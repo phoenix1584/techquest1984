@@ -9,7 +9,14 @@ class UDTContainer{
 	public:
 
 };
-
+template <const char* in>
+class Test{
+	private:
+		std::string m_str;
+	public:
+		Test();
+		
+};
 int main(){
 
 	UDTContainer<std::vector,std::string> obj_udtc;
