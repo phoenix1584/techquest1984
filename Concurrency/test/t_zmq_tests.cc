@@ -33,17 +33,6 @@
 #include <sstream>
 #include <vector>
 #include "logger.hh"
-namespace utils{
-    class TestUtils{
-        public:
-            std::string LogPathCreator(std::string test_name){
-                std::string log_path("/tmp/");
-                log_path.append(boost::unit_test::framework::current_test_case().p_name);
-                log_path.append(".log");
-                return log_path;
-            }
-    };
-};
 
 using namespace utils;
 BOOST_AUTO_TEST_SUITE(zmq_tests)
