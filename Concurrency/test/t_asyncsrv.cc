@@ -5,15 +5,15 @@
 //  context and conceptually acts as a separate process.
 
 #define BOOST_TEST_MODULE COMMUNICATION 
-#include <boost/test/unit_test.hpp>
+#include "boost/test/unit_test.hpp"
 
 #include <array>
 #include <thread>
 #include <memory>
 #include <functional>
 
-#include <zmq.hpp>
-#include <zhelpers.hpp>
+#include "zmq.hpp"
+#include "zhelpers.hpp"
 #include "t_comm_classes.hh"
 
 using namespace test_comm;

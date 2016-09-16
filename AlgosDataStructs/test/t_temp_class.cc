@@ -14,12 +14,12 @@ class Test<void>{
         Test(){}
 };
 
-template<const char* NAME> 
+template<typename NAME=const char*> 
 class Name{
     std::string m_name;
     public:
-        Name()
-        :m_name(NAME)
+        Name(NAME name)
+        :m_name(name)
         {}
 };
 
@@ -28,5 +28,5 @@ int main()
     Test<int> ti(10); 
     Test<std::string> ts("TEST");
     Test<void> td;
-    Name<"TEST"> mn;
+    Name<> mn("TEST");
 }
