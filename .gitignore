@@ -1,5 +1,6 @@
 AlgosDataStructs/lib/
 AlgosDataStructs/doc/html
+AlgosDataStructs/test/*.o
 BuildTools/bin/
 BuildTools/lib/
 BuildTools/src/*.o
