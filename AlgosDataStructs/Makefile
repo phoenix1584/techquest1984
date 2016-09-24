@@ -14,4 +14,5 @@ tests: library
 clean:
 	make -C src/ clean
 	make -C test/ clean	
+	rm -f bin/*
 
