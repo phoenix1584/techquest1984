@@ -137,7 +137,12 @@ class NameRegistry{
         std::map<COMMAND,USER_VARIANT> m_cmd_registry;
     public:
         NameRegistry(){
-            m_registry = boost::assign::map_list_of(REGISTER, std::string("REGISTER"))(GETDATA, std::string("GETDATA"))(SETDATA, std::string("SETDATA"))(RESET,std::string("RESET"))(UNKOWN,std::string("UNKOWN"));
+            m_registry.insert(std::pair<COMMAND,std::string>(REGISTER, std::string("REGISTER"))); 
+            m_registry.insert(std::pair<COMMAND,std::string>(GETDATA, std::string("GETDATA"))); 
+            m_registry.insert(std::pair<COMMAND,std::string>(SETDATA, std::string("SETDATA"))); 
+            m_registry.insert(std::pair<COMMAND,std::string>(RESET,std::string("RESET"))); 
+            m_registry.insert(std::pair<COMMAND,std::string>(UNKOWN,std::string("UNKOWN"))); 
+
             m_cmd_registry.insert(std::pair<COMMAND,VariantCommand<REGISTER> >(REGISTER, VariantCommand<REGISTER>()));
             m_cmd_registry.insert(std::pair<COMMAND,VariantCommand<GETDATA> >(GETDATA, VariantCommand<GETDATA>()));
             m_cmd_registry.insert(std::pair<COMMAND,VariantCommand<SETDATA> >(SETDATA, VariantCommand<SETDATA>()));

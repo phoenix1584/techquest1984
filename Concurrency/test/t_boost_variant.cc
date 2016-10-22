@@ -258,10 +258,10 @@ BOOST_AUTO_TEST_CASE(visitor_return){
     int i = 10;
     double d = 11.0;
     v = d;
-    std::cout << boost::apply_visitor(ReturnTypeHandler(),v) << "\n";
+    BOOST_TEST_MESSAGE(boost::apply_visitor(ReturnTypeHandler(),v));
 
     v = i;
-    std::cout << boost::apply_visitor(ReturnTypeHandler(),v) << "\n";
+    BOOST_TEST_MESSAGE(boost::apply_visitor(ReturnTypeHandler(),v));
 }
 
 // Variant handler using binary variant i.e two variant input parameters 
