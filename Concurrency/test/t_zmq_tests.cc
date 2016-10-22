@@ -51,11 +51,51 @@
 #include "Poco/PipeStream.h"
 #include "Poco/StreamCopier.h"
 #include <boost/filesystem.hpp>
+#include <boost/assign.hpp>
 #include <sstream>
 #include <vector>
+#include <set>
+#include <map>
 #include "logger.hh"
 
 using namespace utils;
+class TestUtils{
+    private:
+        /// Command response dictionary for verfication.
+        std::map<std::string,std::string> m_cmd_resp_dict;
+        /// Default response string
+        std::string m_default_response;
+    public:
+        /// C'tor
+        TestUtils()
+            :m_default_response("UNKOWN_COMMAND"){
+            //    m_cmd_resp_dict = boost::assign::map_list_of("REGISTER","REG_ACK")("COMMAND_1","CMD_ACK")("TASK","TASK_ACK")("STOP","STOP_ACK");
+            }
+        std::string LogPathCreator(std::string test_name){
+            std::string log_path("/tmp/");
+            log_path.append(boost::unit_test::framework::current_test_case().p_name);
+            log_path.append(".log");
+            return log_path;
+        }
+
+        std::string GetIDString(){
+            // generate random identity
+            char identity[10] = {};
+            sprintf(identity, "%04X-%04X", within(0x10000), within(0x10000));
+            std::string id(identity);
+            BOOST_ASSERT(id.length() == strlen(identity));
+            return id;
+        }
+
+        std::string GetResponse(const std::string& req){
+            std::map<std::string,std::string>::iterator it = m_cmd_resp_dict.find(req);
+            return (it != m_cmd_resp_dict.end()) ? it->second : m_default_response ;
+        }
+
+        const std::map<std::string,std::string> GetDictionary(){
+            return m_cmd_resp_dict;
+        }
+};
 BOOST_AUTO_TEST_SUITE(zmq_tests)
 BOOST_AUTO_TEST_CASE(zmq_server){
     TestUtils test_utils;
