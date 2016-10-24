@@ -15,3 +15,4 @@ Concurrency/bin/
 Concurrency/lib/
 Concurrency/src/*.o
 Concurrency/test/*.o
+Concurrency/platform.env
