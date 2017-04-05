@@ -5,11 +5,11 @@ RELEASE_VERSION= 1
 
 #Paths variables
 BASE_PATH=$(PWD)
-INC_PATH= -I $(PWD)/include/ -I $(HOME)/CodeBase/boost_1_60_0 -I $(HOME)/CodeBase/zeromq-4.1.5/include -I $(HOME)/CodeBase/cppzmq/ -I $(HOME)/CodeBase/zguide/examples/C++/ -I $(HOME)/CodeBase/poco-1.6.1/Util/include -I $(HOME)/CodeBase/poco-1.6.1/Foundation/include
+INC_PATH= -I $(PWD)/include/ -I $(HOME)/CodeBase/boost_1_61_0 -I $(HOME)/CodeBase/zeromq-4.1.5/include -I $(HOME)/CodeBase/cppzmq/ -I $(HOME)/CodeBase/zguide/examples/C++/ -I $(HOME)/CodeBase/poco-1.7.3/Util/include -I $(HOME)/CodeBase/poco-1.7.3/Foundation/include
 LIB_PATH=$(PWD)/lib/
 BIN_PATH=$(PWD)/bin/
 DIR_GUARD=@mkdir -p
-LIBS= -lpthread -L$(HOME)/CodeBase/boost_1_60_0/stage/lib -lboost_serialization -L$(HOME)/CodeBase/boost_1_60_0/stage/lib -lboost_unit_test_framework -L$(HOME)/CodeBase/zeromq-4.1.5/.libs/ -lzmq 
+LIBS= -lpthread -L$(HOME)/CodeBase/boost_1_61_0/stage/lib -lboost_serialization -L$(HOME)/CodeBase/boost_1_61_0/stage/lib -lboost_unit_test_framework -L$(HOME)/CodeBase/zeromq-4.1.5/.libs/ -lzmq -L$(HOME)/CodeBase/poco-1.7.3/lib/Linux/x86_64 -lPocoFoundation -L$(HOME)/CodeBase/poco-1.7.3/lib/Linux/x86_64 -lPocoJSON -L$(HOME)/CodeBase/poco-1.7.3/lib/Linux/x86_64 -lPocoUtil -L$(HOME)/CodeBase/poco-1.7.3/lib/Linux/x86_64 -lPocoXML 
 
 # Refs : GCC_COMPAT
 GCC_VER_CMP48 :=$(shell (echo `gcc -dumpversion | cut -f1-2 -d.` \>= 4.8 | bc))
