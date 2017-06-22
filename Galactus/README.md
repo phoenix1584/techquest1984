@@ -20,6 +20,20 @@ Galactus
 
 4. Design Notes
 
+h1. Components of System
+
+* Basic Number System
+  - Comprises of set of fixed symbols
+  - Each symbol has predefined constant value.
+  - Basic arithmatic rules for value translation
+  - Unacceptable patterns
+ 
+ * Query Subsystem
+  - Assignment queries to assign alternative token to predefined constant value.
+  - Assignment query to define a translation between tokens of two numeric systems.
+  - Computational query to convert tokens into value.
+  - Computational query to translate value between two number systems.
+
 5. Test Case Usage
 
 6. References
