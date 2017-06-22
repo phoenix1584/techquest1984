@@ -1,6 +1,6 @@
 include $(PWD)/paths.env
 
-CXX= g++
+CXX= g++ -std=c++11
 DEBUG= -g
 CXXFLAGS= -pipe $(DEBUG) -Wall -O2 
 LD_LIB_FLAGS= -fPIC -shared -rdynamic -Wl,-soname,$(BASE_LIB_NAME).so
