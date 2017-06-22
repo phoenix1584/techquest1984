@@ -1,0 +1,4 @@
+#ifndef QUERY_PARSER_HH
+#define QUERY_PARSER_HH
+
+#endif /*QUERY_PARSER_HH*/
