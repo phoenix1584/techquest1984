@@ -41,13 +41,33 @@ BOOST_AUTO_TEST_CASE(data_comp){
 
 BOOST_AUTO_TEST_CASE(to_roman){
     BT_START;
-    RomanSystem rs;
-    BOOST_TEST_MESSAGE(rs.ToRoman(101));
+    try{
+        RomanSystem rs;
+        BOOST_TEST_MESSAGE("Input 101 : " << rs.ToRoman(101));
+        BOOST_TEST_MESSAGE("Input 5000 : " << rs.ToRoman(5000));
+    }catch(RomanCoversionException& e){
+        BOOST_TEST_MESSAGE(e.what());
+    }
 }
 
-BOOST_AUTO_TEST_CASE(to_auto){
+BOOST_AUTO_TEST_CASE(to_value){
     BT_START;
     RomanSystem rs;
     BOOST_TEST_MESSAGE(rs.ToValue("XXI"));
+}
+
+BOOST_AUTO_TEST_CASE(sym_check){
+    BT_START;
+    RomanSystem rs;
+    try{
+        /// Following is done to avoid the duplication of transform inside Roman system class.
+        std::string test("iiii");
+        std::transform(test.begin(),test.end(),test.begin(),toupper);
+        BOOST_CHECK( true == rs.SymbolChecker(test));
+    }catch(RomanCoversionException& e){
+        BOOST_TEST_MESSAGE(e.what());
+    }
+
+
 }
 BOOST_AUTO_TEST_SUITE_END()

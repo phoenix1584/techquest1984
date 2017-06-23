@@ -62,6 +62,9 @@ namespace galaxy_trade{
             /// Symbol to value map for quick access.
             std::map<char,unsigned int> m_roman_dictionary;
 
+			/// Collection of unacceptable patterns
+			std::set<std::string> m_blacklist;
+
         public:
             /// Constructor
             RomanSystem(); /// TODO: Initializer list usage.
@@ -72,8 +75,10 @@ namespace galaxy_trade{
             /// Convert from symbols to value 
             unsigned int ToValue(std::string symbols);
 
-            /// Format checker for roman symbols
+            /// @brief Format checker for roman symbols
+			/// 
             /// TODO : accept input patterns as files
+			/// Check for acceptable patterns from the dictionary object.
             bool SymbolChecker(const std::string symbols);
 
     };
