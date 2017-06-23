@@ -4,20 +4,20 @@ using namespace galaxy_trade;
 
 RomanSystem::RomanSystem(){
     /// TODO: Initializer list usage.
-    m_value_data.insert(RomanSymbol(1000, "M"));
-    m_value_data.insert(RomanSymbol(900, "CM"));
-    m_value_data.insert(RomanSymbol(500, "D"));
-    m_value_data.insert(RomanSymbol(400, "CD"));
-    m_value_data.insert(RomanSymbol(100, "C"));
-    m_value_data.insert(RomanSymbol( 90, "XC"));
-    m_value_data.insert(RomanSymbol( 50, "L"));
-    m_value_data.insert(RomanSymbol( 40, "XL"));
-    m_value_data.insert(RomanSymbol( 10, "X"));
-    m_value_data.insert(RomanSymbol( 9, "IX"));
-    m_value_data.insert(RomanSymbol( 5, "V"));
-    m_value_data.insert(RomanSymbol( 4, "IV"));
-    m_value_data.insert(RomanSymbol( 1, "I"));
-    m_value_data.insert(RomanSymbol( 0, "NOT_VALID")); 
+    m_value_data.emplace(RomanSymbol(1000, "M"));
+    m_value_data.emplace(RomanSymbol(900, "CM"));
+    m_value_data.emplace(RomanSymbol(500, "D"));
+    m_value_data.emplace(RomanSymbol(400, "CD"));
+    m_value_data.emplace(RomanSymbol(100, "C"));
+    m_value_data.emplace(RomanSymbol( 90, "XC"));
+    m_value_data.emplace(RomanSymbol( 50, "L"));
+    m_value_data.emplace(RomanSymbol( 40, "XL"));
+    m_value_data.emplace(RomanSymbol( 10, "X"));
+    m_value_data.emplace(RomanSymbol( 9, "IX"));
+    m_value_data.emplace(RomanSymbol( 5, "V"));
+    m_value_data.emplace(RomanSymbol( 4, "IV"));
+    m_value_data.emplace(RomanSymbol( 1, "I"));
+    m_value_data.emplace(RomanSymbol( 0, "NOT_VALID")); 
     
     m_roman_dictionary['I'] = 1;
     m_roman_dictionary['V'] = 5;
@@ -42,7 +42,7 @@ std::string RomanSystem::ToRoman(unsigned int value){
 
 unsigned int RomanSystem::ToValue(std::string symbols){
     unsigned int result = 0;
-    for (int i = 0; i < (symbols.length() - 1); ++i) 
+    for (int i = 0; i < (symbols.length() - 1); ++i){ 
         unsigned int cur = m_roman_dictionary[symbols[i]];
         unsigned int next = m_roman_dictionary[symbols[i + 1]];
         if(cur >= next){
