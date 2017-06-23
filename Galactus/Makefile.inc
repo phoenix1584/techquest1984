@@ -2,9 +2,11 @@ include $(PWD)/paths.env
 
 CXX= g++ -std=c++11
 DEBUG= -g
-CXXFLAGS= -pipe $(DEBUG) -Wall -O2 
+CXXFLAGS= -pipe $(DEBUG) -Wall -O2 -fPIC 
 LD_LIB_FLAGS= -fPIC -shared -rdynamic -Wl,-soname,$(BASE_LIB_NAME).so
 DEL_FILE= rm -f
+AR= ar
+ARFLAGS= cqs
 
 INC_BOOST= -I$(BOOST_INC_PATH)
 LIB_BOOST= -L $(BASE_PATH)/extern/lib/
@@ -26,7 +28,7 @@ OBJS=$(patsubst %.cc,%.o,$(SRCS))
 	$(CXX) $(CXXFLAGS) $(INC_PATH) -c $< 
 
 RULE_TESTS = \
-    $(CXX) $(CXXFLAGS) $(INC_PATH)  $< -o $@ $(LIB_BOOST_TEST)      
+    $(CXX) $(CXXFLAGS) $(INC_PATH)  $< -o $@ $(LIB_BOOST_TEST) $(APP_LIB)     
 
 # Modules as application
 RULE_APP = \

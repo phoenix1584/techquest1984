@@ -13,7 +13,7 @@ $(APP_NAME): $(OBJS)
 $(LIB_STATIC):
 	$(RULE_LIB_STATIC)
 
-$(LIB_DYN):
+$(LIB_DYN): $(OBJS)
 	$(RULE_LIB_DYN)
 
 clean:
