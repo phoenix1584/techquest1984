@@ -70,6 +70,9 @@ namespace galaxy_trade{
             RomanSystem(); /// TODO: Initializer list usage.
             
             /// Convert integer to roman symbol representation
+            /// \param[in] value - integer to be converted
+            /// \return std::string roman representation
+            /// \throw RomanCoversionException
             std::string ToRoman(unsigned int value);
 
             /// Convert from symbols to value 
@@ -77,9 +80,11 @@ namespace galaxy_trade{
 
             /// @brief Format checker for roman symbols
 			/// 
+            /// \param[in] symbols - string to be verified. in upper case.
+            /// \throw RomanCoversionException
             /// TODO : accept input patterns as files
 			/// Check for acceptable patterns from the dictionary object.
-            bool SymbolChecker(const std::string symbols);
+            void SymbolChecker(const std::string symbols);
 
     };
 };

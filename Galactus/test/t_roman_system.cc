@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(sym_check){
         /// Following is done to avoid the duplication of transform inside Roman system class.
         std::string test("iiii");
         std::transform(test.begin(),test.end(),test.begin(),toupper);
-        BOOST_CHECK( true == rs.SymbolChecker(test));
+        rs.SymbolChecker(test);
     }catch(RomanCoversionException& e){
         BOOST_TEST_MESSAGE(e.what());
     }

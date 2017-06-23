@@ -72,28 +72,24 @@ std::string RomanSystem::ToRoman(unsigned int value){
 
 unsigned int RomanSystem::ToValue(std::string symbols){
     std::transform(symbols.begin(),symbols.end(),symbols.begin(),toupper);
-    if(SymbolChecker(symbols)){
-        unsigned int result = 0;
-        for (unsigned int i = 0; i < (symbols.length() - 1); ++i){ 
-            unsigned int cur = m_roman_dictionary[symbols[i]];
-            unsigned int next = m_roman_dictionary[symbols[i + 1]];
-            if(cur >= next){
-                result += cur; 
-            }else{
-                result -= cur;
-            }
+    SymbolChecker(symbols);
+    unsigned int result = 0;
+    for (unsigned int i = 0; i < (symbols.length() - 1); ++i){ 
+        unsigned int cur = m_roman_dictionary[symbols[i]];
+        unsigned int next = m_roman_dictionary[symbols[i + 1]];
+        if(cur >= next){
+            result += cur; 
+        }else{
+            result -= cur;
         }
-        return (result + m_roman_dictionary[symbols[symbols.length() - 1]]);
-    }else{
-        return 0;
     }
+    return (result + m_roman_dictionary[symbols[symbols.length() - 1]]);
 }
 
-bool RomanSystem::SymbolChecker(const std::string symbols){
+void RomanSystem::SymbolChecker(const std::string symbols){
     for(const auto& token : m_blacklist){
         if(std::string::npos != symbols.find(token) ){
             throw RomanCoversionException("Invalid pattern detected in input string.");
         } 
     }
-    return true;
 }
