@@ -2,6 +2,7 @@
 #define DYNAMIC_SYSTEM_HH
 
 #include "romansystem.hh"
+#include <boost/algorithm/string.hpp>
 #include <ostream>
 
 namespace galaxy_trade{

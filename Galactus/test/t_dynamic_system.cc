@@ -37,4 +37,12 @@ BOOST_AUTO_TEST_CASE(get_value){
     std::string test("prok");
     BOOST_TEST_MESSAGE(" Test Input : prok => Roman : "<< dns.ToRoman("prok") << ", Value : " << dns.ToValue("prok"));
 }
+
+BOOST_AUTO_TEST_CASE(conversion){
+    BT_START;
+    std::string data("prok glob");
+    DynamicNumberSystem dns;
+    Populate(dns);
+    BOOST_TEST_MESSAGE( data << " => " << dns.ToValue(data));
+}
 BOOST_AUTO_TEST_SUITE_END()

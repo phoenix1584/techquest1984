@@ -14,19 +14,20 @@ bool DynamicNumberSystem::IsValidSymbol(const std::string s){
 }
 
 unsigned int DynamicNumberSystem::ToValue(std::string sym){
-    std::map<std::string,std::string>::iterator itr = m_dyn_dictionary.find(sym);
-    if(itr != m_dyn_dictionary.end()){
-        return RomanSystem::ToValue(itr->second);
-    }else{
-        throw DynamicDataException("Unkown dynamic symbol.");
-    }
+    return RomanSystem::ToValue(ToRoman(sym));
 }
 
 std::string DynamicNumberSystem::ToRoman(std::string sym){
-    std::map<std::string,std::string>::iterator itr = m_dyn_dictionary.find(sym);
-    if(itr != m_dyn_dictionary.end()){
-        return itr->second;
-    }else{
-        throw DynamicDataException("Unkown dynamic symbol.");
+    std::vector<std::string> split_data;
+    boost::split(split_data,sym,boost::is_any_of(" "));    
+    std::string roman;
+    for(const auto& d : split_data){ 
+        std::map<std::string,std::string>::iterator itr = m_dyn_dictionary.find(d);
+        if(itr != m_dyn_dictionary.end()){
+            roman.append(itr->second);
+        }else{
+            throw DynamicDataException("Unkown dynamic symbol.");
+        }
     }
+    return roman;
 }
