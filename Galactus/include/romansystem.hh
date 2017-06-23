@@ -86,6 +86,9 @@ namespace galaxy_trade{
 			/// Check for acceptable patterns from the dictionary object.
             void SymbolChecker(const std::string symbols);
 
+            /// Check if a provided string is a known roman symbol
+            bool IsRoman(const std::string& token) const;
+
     };
 };
 

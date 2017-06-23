@@ -93,3 +93,10 @@ void RomanSystem::SymbolChecker(const std::string symbols){
         } 
     }
 }
+            
+bool RomanSystem::IsRoman(const std::string& token) const{
+    if(1 != token.size()){
+        return false;
+    }
+    return (m_roman_dictionary.end() != m_roman_dictionary.find(toupper(token[0])));
+}

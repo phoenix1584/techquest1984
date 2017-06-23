@@ -86,6 +86,15 @@ namespace galaxy_trade{
             ~QuerySyntaxException(){}
     };
 
+    /// Exception class to indicate issues related to dynamic system
+    class DynamicDataException : public BaseException{
+        public:
+            DynamicDataException(std::string message)
+                :BaseException("DynamicDataException",message)
+            {}
+
+            ~DynamicDataException(){}
+    };
 };
 
 #endif /*GALACTIC_EXCPETIONS_HH*/

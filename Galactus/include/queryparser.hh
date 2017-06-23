@@ -1,17 +1,26 @@
 #ifndef QUERY_PARSER_HH
 #define QUERY_PARSER_HH
 
-#include "romansystem.hh"
+#include "dynamicsystem.hh"
 
 /// @brief : Class that encapsulates the query parsing and dynamic token conversions
 ///
 /// Needs to handle the dynamic tokens being accumlated with each query being parsed.
-/// TODO: Should write the data to file in a fixed pattern that will behave as the training data set
-/// that can be loaded every time an instance is executed. 
+/// TODO:
+/// * Should write the data to file in a fixed pattern that will behave as the training data set
+///   that can be loaded every time an instance is executed. 
+/// * Inputs for operators, units , computation patterns should come from files accepted as input.
+//    That will keep this code as generic algorithms independent of any static data.
 class QueryParser{
     private:
         /// Base system conversion instance.
         galaxy_trade::RomanSystem m_roman_system;
+
+        /// Collection of recognized operators
+        std::set<std::string> m_operators;
+
+        /// Collection of valid Units
+        std::set<std::string> m_units;        
 
     public:
         
