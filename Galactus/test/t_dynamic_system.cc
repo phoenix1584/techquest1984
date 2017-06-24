@@ -8,7 +8,7 @@
         << boost::unit_test::framework::current_test_case().p_name << \
         "\n**************************************************************************\n")
 
-#define BOOST_TEST_MODULE ROMAN_SYSTEM 
+#define BOOST_TEST_MODULE DYNAMIC_SYSTEM 
 #include <boost/test/unit_test.hpp>
 #include "dynamicsystem.hh"
 
@@ -22,7 +22,7 @@ void Populate(DynamicNumberSystem& data){
     data.AddSymbol("tegj","L");
 }
 
-BOOST_AUTO_TEST_SUITE(roman_system)
+BOOST_AUTO_TEST_SUITE(dynamic_system)
     BOOST_AUTO_TEST_CASE(add_value){
         BT_START;
         DynamicNumberSystem dns;
