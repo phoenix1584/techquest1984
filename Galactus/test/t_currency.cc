@@ -24,5 +24,6 @@ void Populate(DynamicNumberSystem& data){
 
 BOOST_AUTO_TEST_SUITE(currency_system)
     BOOST_AUTO_TEST_CASE(add_value){
+
     }
 BOOST_AUTO_TEST_SUITE_END()
