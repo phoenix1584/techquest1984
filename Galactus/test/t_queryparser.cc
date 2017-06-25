@@ -70,5 +70,6 @@ BOOST_AUTO_TEST_CASE(split_query){
     std::string token("is");
     std::size_t found = query.find(token);
     BOOST_TEST_MESSAGE(((std::string::npos == found) ? "Token NOT found" : std::string(query.begin()+found + token.size(), query.end())));
+    BOOST_TEST_MESSAGE(std::string(query.begin(),query.begin() + found));
 }
 BOOST_AUTO_TEST_SUITE_END()

@@ -32,6 +32,9 @@ namespace galaxy_trade{
             /// Collection of valid Units
             std::set<std::string> m_units;        
 
+            /// represents the pivot token. But this has to be collection not just one.
+            std::string m_pivot_token;
+            
         public:
 
             /// Constructor
@@ -49,7 +52,15 @@ namespace galaxy_trade{
             /// \param[in] query - query to be verified.
             /// \throw QuerySyntaxException, RomanCoversionException
             void VerifyQuery(std::string query);
+            
+            /// FIXME : Following are kept public for testing. But ideally they shouldn't be.
+            /// One way to tackle this problem would be define a frien test class.
 
+            /// Process assigment type of query
+            void ProcessAssignmentQuery(std::string token,std::string value);
+
+            /// Process evaluation type of query
+            std::string ProcessEvaluationQuery(std::string eval_expression);
     };
 };
 

@@ -95,6 +95,17 @@ namespace galaxy_trade{
 
             ~DynamicDataException(){}
     };
+
+    /// Exception class to indicate problems in currency tranformations
+    class CurrencyExceptions : public BaseException{
+        public:
+            CurrencyExceptions(std::string message)
+                :BaseException("CurrencyExceptions",message)
+            {}
+
+            ~CurrencyExceptions(){};
+    
+    };
 };
 
 #endif /*GALACTIC_EXCPETIONS_HH*/

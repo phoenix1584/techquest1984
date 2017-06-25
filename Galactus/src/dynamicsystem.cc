@@ -1,4 +1,6 @@
 #include "dynamicsystem.hh"
+#include <regex>
+
 using namespace galaxy_trade;
 
 void DynamicNumberSystem::AddSymbol(std::string dyn_symbol,std::string roman_symbol){
@@ -18,6 +20,7 @@ unsigned int DynamicNumberSystem::ToValue(std::string sym){
 }
 
 std::string DynamicNumberSystem::ToRoman(std::string sym){
+    sym = std::regex_replace(sym, std::regex("^ +| +$|( ) +"), "$1");
     std::vector<std::string> split_data;
     boost::split(split_data,sym,boost::is_any_of(" "));    
     std::string roman;

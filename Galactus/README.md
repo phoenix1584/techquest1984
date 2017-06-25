@@ -77,15 +77,19 @@ Galactus
   
 ## TODO ##
 
-* Handling of duplicate pivot words like IS in the queries.
-* Accept the base number system as input file. Challenge here is communicating the rules like arithmetics.
-* Unit should be configurable string.
-* Using standard library regex instead of boost.
+ * Handling of duplicate pivot words like IS in the queries.
+ * Accept the base number system as input file. Challenge here is communicating the rules like arithmetics.
+ * Unit should be configurable string.
+ * Using standard library regex instead of boost.
+ * Use rvalue semantics and move constructors to reduce data copies while passing string objects.
 
 # Known Issues #
  
  * Boost dependecies deployment should be more efficient. 
  * Using header only boost unit test suite.
+ * All systems should expose a common API. Inheritance not imposing the rule strictly.
+ * insufficient negative testing.
+ * No logging.
 
 # References #
 

@@ -14,16 +14,11 @@
 
 using namespace galaxy_trade;
 
-/// Could add more symbols if needed but enough to prove that file could be used to perform similar task.
-void Populate(DynamicNumberSystem& data){
-    data.AddSymbol("glob","I");
-    data.AddSymbol("prok","V");
-    data.AddSymbol("pish","X");
-    data.AddSymbol("tegj","L");
-}
-
 BOOST_AUTO_TEST_SUITE(currency_system)
     BOOST_AUTO_TEST_CASE(add_value){
-
+        Currency curr_sys;
+        curr_sys.AddToken("glob","I");
+        curr_sys.AddToken("glob glob Silver Data ","400 Credits");
+        BOOST_TEST_MESSAGE( "Input glob glob Silver Data : 400 , output => glob Silver Data : " << curr_sys.ToValue("glob Silver Data"));
     }
 BOOST_AUTO_TEST_SUITE_END()
