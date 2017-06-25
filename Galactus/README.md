@@ -10,9 +10,9 @@ Galactus
  * arch : 64 bit
  * Compiler : gcc 4.8.3 or higher (using c++11 flag)
  * boost 1.61
-   Only source code needed. Necessary boost shared library files being included in extern/lib folder. 
-   URL : https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2/download 
-
+    * Only source code needed. Necessary boost shared library files being included in extern/lib folder. 
+    * URL : https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2/download 
+ 
 # Build #
  * All of the following instructions assume the current directory as Galactus i.e the uncompressed folder.
  * Update the variable BOOST_INC_PATH in file paths.env with absolute path of boost source code directory. 
@@ -24,8 +24,16 @@ Galactus
  * To clean the code base
     $ make clean
  * Creates application galactus, shared and static library with the same name.
+ * Generating documentation
+   $ cd build
+   $ doxygen galactus.doxygen
 
-# Test Case Usage #
+## Application ##
+
+ * Application binary is available in bin folder
+   $./bin/galactus test_queries.txt
+
+## Test Case Usage ##
 
  * Test cases
     t_dynamic_system

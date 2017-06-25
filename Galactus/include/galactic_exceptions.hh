@@ -6,7 +6,7 @@
 
 namespace galaxy_trade{
     /**
-     *  UFO base exception class.
+     *  Base exception class.
      */
     class BaseException : public std::exception
     {
