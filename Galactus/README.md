@@ -3,7 +3,7 @@ Galactus
 
 # Objective #
 
-  * Implement solution for a crude Natural language processing (NLP) framework.
+  * Implement an elementary language processing framework.
 
 # Dependencies #
  * OS : Linux
@@ -14,8 +14,11 @@ Galactus
    URL : https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2/download 
 
 # Build #
+ * All of the following instructions assume the current directory as Galactus i.e the uncompressed folder.
  * Update the variable BOOST_INC_PATH in file paths.env with absolute path of boost source code directory. 
    Example : BOOST_INC_PATH = /home/user/codebase/boost_1_61_0
+ * For library linkage append the local paths using following command.
+   $ export LD_LIBRARY_PATH=$PWD/src:$PWD/extern/lib:$LD_LIBRARY_PATH
  * To compile source and test cases 
     $ make 
  * To clean the code base
@@ -81,8 +84,7 @@ Galactus
 
 # Known Issues #
  
- * Static Linkage used for test cases.
- * Boost dependecies deployment should be morie efficient. 
+ * Boost dependecies deployment should be more efficient. 
  * Using header only boost unit test suite.
 
 # References #

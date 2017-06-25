@@ -15,22 +15,26 @@
 #include "queryparser.hh"
 using namespace galaxy_trade;
 
+void Populate(std::vector<std::string>& test_data){
+    test_data.push_back("test query");
+    test_data.push_back("glob is I");
+    test_data.push_back("prok is V");
+    test_data.push_back("pish is X");
+    test_data.push_back("tegj is L");
+    test_data.push_back("glob glob Silver is 34 Credits");
+    test_data.push_back("glob prok Gold is 57800 Credits");
+    test_data.push_back("pish pish Iron is 3910 Credits");
+    test_data.push_back("how much is pish tegj glob glob ?");
+    test_data.push_back("how many Credits is glob prok Silver ?");
+    test_data.push_back("how many Credits is glob prok Gold ?");
+    test_data.push_back("how many Credits is glob prok Iron ?");
+    test_data.push_back("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?");
+}
+
 BOOST_AUTO_TEST_SUITE(query_parser)
     BOOST_AUTO_TEST_CASE(verify){
         std::vector<std::string> test_data;
-        test_data.push_back("test query");
-        test_data.push_back("glob is I");
-        test_data.push_back("prok is V");
-        test_data.push_back("pish is X");
-        test_data.push_back("tegj is L");
-        test_data.push_back("glob glob Silver is 34 Credits");
-        test_data.push_back("glob prok Gold is 57800 Credits");
-        test_data.push_back("pish pish Iron is 3910 Credits");
-        test_data.push_back("how much is pish tegj glob glob ?");
-        test_data.push_back("how many Credits is glob prok Silver ?");
-        test_data.push_back("how many Credits is glob prok Gold ?");
-        test_data.push_back("how many Credits is glob prok Iron ?");
-        test_data.push_back("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?");
+        Populate(test_data);
         QueryParser qp;
         for(const auto& v : test_data){
             try{
@@ -58,5 +62,13 @@ BOOST_AUTO_TEST_CASE(str_replace){
     std::regex_replace(std::ostreambuf_iterator<char>(std::cout),query.begin(), query.end(), terminators, "*"); 
     std::cout << std::regex_replace(query,terminators,"") << "\n";
     BOOST_TEST_MESSAGE(std::regex_replace(query,terminators,"TOKEN"));
+}
+
+BOOST_AUTO_TEST_CASE(split_query){
+    BT_START;
+    std::string query("how many Credits is glob prok Iron ?");
+    std::string token("is");
+    std::size_t found = query.find(token);
+    BOOST_TEST_MESSAGE(((std::string::npos == found) ? "Token NOT found" : std::string(query.begin()+found + token.size(), query.end())));
 }
 BOOST_AUTO_TEST_SUITE_END()

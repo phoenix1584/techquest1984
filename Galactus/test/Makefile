@@ -1,7 +1,7 @@
 include ../Makefile.inc
 
 all: $(TESTS)
-APP_LIB += $(BASE_PATH)/src/libgalactus.a
+APP_LIB += -L $(BASE_PATH)/src/ -lgalactus
 .cc:
 	$(RULE_TESTS)
 
