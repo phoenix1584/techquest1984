@@ -27,6 +27,7 @@ void Currency::AddToken(std::string commodity, std::string value){
                 dyn_symbols.append(" ");
             }else{
                 commodity_symbols.append(v);
+                commodity_symbols.append(" ");
             }
         }
 
@@ -62,7 +63,8 @@ std::string Currency::ToValue(std::string sym,std::string token){
             dyn_symbols.append(v);
             dyn_symbols.append(" ");
         }else{
-                commodity_symbols.append(v);
+            commodity_symbols.append(v);
+            commodity_symbols.append(" ");
         }
     }
 #ifdef LIB_DEBUG

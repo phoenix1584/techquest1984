@@ -7,7 +7,8 @@ using namespace galaxy_trade;
 /// TODO: Use boost option and boost log for cleaner application help and option handling.
 int main(int argc,char* argv[]){
     if(argc != 2){
-        std::cout << "Usage : galactus <query-file-path>\n";
+        std::cout << "Usage : galactus <query-file-path> \n";
+        std::cout << "Sample query file : test/test_queries.txt \n";
         return 1;
     }
     try{
