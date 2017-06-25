@@ -54,7 +54,7 @@ TESTS=$(SRCS:.cc=)
 
 RULE_TEST_SUITE = \
 for t_case in $(TESTS); do \
-    ./$$t_case --log_level=test_suite --log_format=XML --log_sink=$(UFO_SVN_BASE_PATH)/$$t_case.xml --result_code=no --report_level=detailed --report_format=XML   ;    \
+    ./$$t_case --log_level=test_suite --report_level=detailed ;    \
 done
 
 #Rule to clean files

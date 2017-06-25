@@ -28,19 +28,16 @@ Galactus
 # Test Case Usage #
 
  * Test cases
-    t_currency
     t_dynamic_system
     t_queryparser
     t_roman_system
+ 
+    Note : t_galactus and t_currency are placeholder test cases.
 
  * Execution
-   $ ./test/test-case-name --log_level=message
+   $ ./test/test-case-name --log_level=message --report_level=detailed
    Example
-   subodh@ubuntu:~/CodeBase/Galactus$ ./test/t_queryparser --log_level=message
-   Running 1 test case...
-   [QuerySyntaxException]: I have no idea what you are talking about.
-   Test case query_parser/verify did not check any assertions
- 
+   $~/CodeBase/Galactus$ ./test/t_queryparser --log_level=message --report_level=detailed
 
 # Design : Components of System #
 
@@ -91,6 +88,8 @@ Galactus
  * insufficient negative testing.
  * No logging.
  * Deals in integers not real numbers.
+ * Original case of data is lost due to passing data by value and other transformations.
+ * minimizing string copies.
 
 # References #
 
