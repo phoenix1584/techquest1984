@@ -1,6 +1,9 @@
 #include "currency.hh"
 #include <boost/lexical_cast.hpp>
-
+#include <regex>
+#ifdef LIB_DEBUG
+#include <iostream>
+#endif
 using namespace galaxy_trade;
 
 void Currency::AddToken(std::string commodity, std::string value){
@@ -8,7 +11,11 @@ void Currency::AddToken(std::string commodity, std::string value){
     /// So append till non dynamic token is found. Not using std::partition since it will reorder container and might
     /// cause issues while expnading the framework.
     std::vector<std::string> split_data;
+    commodity = std::regex_replace(commodity, std::regex("^ +| +$|( ) +"), "$1");
     boost::split(split_data,commodity,boost::is_any_of(" "));
+#ifdef LIB_DEBUG
+    std::cout << commodity << "," << value << "," << split_data.size() << "\n";
+#endif
     if (split_data.size() == 1){
         DynamicNumberSystem::AddSymbol(commodity,value);
     }else{
@@ -43,26 +50,33 @@ void Currency::AddToken(std::string commodity, std::string value){
     }
 }
 
-std::string Currency::ToValue(std::string sym){
+std::string Currency::ToValue(std::string sym,std::string token){
     // TODO : Code replication , convert to function.
     std::vector<std::string> split_data;
+    sym= std::regex_replace(sym, std::regex("^ +| +$|( ) +"), "$1");
     boost::split(split_data,sym,boost::is_any_of(" "));
     std::string dyn_symbols;
     std::string commodity_symbols;
     for(auto& v : split_data){
         if(IsValidSymbol(v)){
             dyn_symbols.append(v);
+            dyn_symbols.append(" ");
         }else{
-            commodity_symbols.append(v);
+                commodity_symbols.append(v);
         }
     }
+#ifdef LIB_DEBUG
+    std::cout << dyn_symbols << "," << commodity_symbols << "\n";
+#endif
     std::string response; 
     if(commodity_symbols.size()){
         std::map<std::string,unsigned int>::iterator itr = m_rate_chart.find(commodity_symbols);
         if(itr == m_rate_chart.end()){
             throw CurrencyExceptions("Unkown symbol provided."); 
         }
-        response = boost::lexical_cast<std::string>(DynamicNumberSystem::ToValue(dyn_symbols) * itr->second);
+        response.append(commodity_symbols);
+        response.append(token);
+        response.append(boost::lexical_cast<std::string>(DynamicNumberSystem::ToValue(dyn_symbols) * itr->second));
         response.append(" ");
         response.append(m_unit_name);
     }else{

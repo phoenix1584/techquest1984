@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "romansystem.hh"
+#include "queryparser.hh"
+using namespace galaxy_trade;
 
 /// TODO: Use boost option and boost log for cleaner application help and option handling.
 int main(int argc,char* argv[]){
@@ -13,13 +14,18 @@ int main(int argc,char* argv[]){
         std::ifstream f_queries(argv[1]);
         if(f_queries){
             std::string query;
-            while(std::getline(f_queries,query)){
-                std::cout << query << "\n";        
-            } 
-            std::cout << "Galactus signing off gracefully." << std::endl;
+                QueryParser q_parser;
+                while(std::getline(f_queries,query)){
+                    try{
+                        std::string ret = q_parser.ProcessQuery(query) ;
+                        if(ret.size()){
+                            std::cout << ret << "\n";
+                        }        
+                    }catch(galaxy_trade::BaseException& e){
+                        std::cout << e.getdisplaymessage() << "\n";
+                    }
+                }
         }
-    }catch(galaxy_trade::BaseException& e){
-        std::cout << "Galactic Exception : " << e.what() << "\n";
     }catch(std::exception& e){
         std::cout << "std::exception : " << e.what() << "\n";
     }

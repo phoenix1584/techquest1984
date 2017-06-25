@@ -90,6 +90,7 @@ Galactus
  * All systems should expose a common API. Inheritance not imposing the rule strictly.
  * insufficient negative testing.
  * No logging.
+ * Deals in integers not real numbers.
 
 # References #
 

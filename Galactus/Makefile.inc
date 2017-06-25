@@ -2,7 +2,7 @@ include $(PWD)/paths.env
 
 CXX= g++ -std=c++11
 DEBUG= -g
-CXXFLAGS= -pipe $(DEBUG) -Wall -O2 -fPIC 
+CXXFLAGS= -pipe $(DEBUG) -Wall -O2 -fPIC -DX_LIB_DEBUG
 LD_LIB_FLAGS= -fPIC -shared -rdynamic -Wl,-soname,$(BASE_LIB_NAME).so
 DEL_FILE= rm -f
 AR= ar

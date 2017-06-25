@@ -29,7 +29,7 @@ namespace galaxy_trade{
             /// Return the value represented. This could be in any number system.
             /// \param[in] sym - data to be translated to value.
             /// \return unsidned int - value in credits
-            std::string ToValue(std::string sym); 
+            std::string ToValue(std::string sym,std::string token = " ");
     
             bool IsValidCommodity(std::string comm_name) const
             { return (m_rate_chart.end() != m_rate_chart.find(comm_name)); }

@@ -59,17 +59,28 @@ BOOST_AUTO_TEST_CASE(str_replace){
    std::string query("How many Credits in this query ?");
    std::regex terminators("C");
    // Ref : http://en.cppreference.com/w/cpp/regex/regex_replace
-    std::regex_replace(std::ostreambuf_iterator<char>(std::cout),query.begin(), query.end(), terminators, "*"); 
+    std::regex_replace(std::ostreambuf_iterator<char>(std::cout),query.begin(), query.end(), terminators, " "); 
     std::cout << std::regex_replace(query,terminators,"") << "\n";
     BOOST_TEST_MESSAGE(std::regex_replace(query,terminators,"TOKEN"));
 }
 
 BOOST_AUTO_TEST_CASE(split_query){
     BT_START;
-    std::string query("how many Credits is glob prok Iron ?");
+    std::string query("test is value");
     std::string token("is");
     std::size_t found = query.find(token);
     BOOST_TEST_MESSAGE(((std::string::npos == found) ? "Token NOT found" : std::string(query.begin()+found + token.size(), query.end())));
     BOOST_TEST_MESSAGE(std::string(query.begin(),query.begin() + found));
+}
+
+BOOST_AUTO_TEST_CASE(term_test){
+    BT_START;
+    std::string text("This is test data?");
+    std::string result;
+    std::remove_copy_if(text.begin(), text.end(),            
+            std::back_inserter(result), //Store output           
+            std::ptr_fun<int, int>(&std::ispunct)  
+            );
+    BOOST_TEST_MESSAGE(result);
 }
 BOOST_AUTO_TEST_SUITE_END()
