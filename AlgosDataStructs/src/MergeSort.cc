@@ -31,7 +31,7 @@ void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int midd
        // Merging the data
        int i = 0, j =0 , k = left_index;
        while(i < l_size && j < r_size){
-            sub_data[k++] = (l_data[i] < r_data[j]) ? l_data[i++] : r_data[j++];
+            sub_data[k++] = (l_data[i] <= r_data[j]) ? l_data[i++] : r_data[j++];
         }
         while (i < l_size)
             sub_data[k++] = l_data[i++];
@@ -51,12 +51,11 @@ void MSort(std::vector<int>& sub_data,unsigned int left_index, unsigned int righ
 
 int main()
 {
-    //std::vector<int> data = {38,27,43,3,9,82,10};
-    std::vector<int> data = {38,27,43};
+    std::vector<int> data = {38,27,43,3,9,82,10};
     for(const auto& x : data)
         std::cout << x << ",";
     std::cout << "\nStarting the sort ...\n";
-    MSort(data,0,data.size());
+    MSort(data,0,data.size()-1);
     for(const auto& x : data)
         std::cout << x << ",";  
     std::cout<< "\nFinished" << std::endl;
