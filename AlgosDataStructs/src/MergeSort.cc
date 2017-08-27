@@ -2,11 +2,10 @@
 #include <iostream>
 #include <vector>
 
-void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int middle_index, unsigned int right_index){
+void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int middle_index, unsigned int right_index, int& inv_count){
     
        const int l_size = middle_index - left_index + 1;
        const int r_size = right_index - middle_index;
-       std::cout << "l_index : " << left_index << ", Right_index : " << right_index << ",Middle_index : " << middle_index << ", l_size : " << l_size << ", r_size " << r_size;
        std::vector<int> l_data,r_data;
        std::vector<int>::iterator itr = sub_data.begin()+left_index;
        for(int x = 0; x < l_size ; ++x){
@@ -19,19 +18,15 @@ void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int midd
             ++itr;
         }
          
-       std::cout << " Left Data : ";
-       for(const auto& x : l_data)
-            std::cout << x << ",";
-       std::cout << " Right Data : ";
-       for(const auto& x : r_data)
-            std::cout << x << ",";
-        std::cout << "\n";
-       
-
        // Merging the data
        int i = 0, j =0 , k = left_index;
        while(i < l_size && j < r_size){
-            sub_data[k++] = (l_data[i] <= r_data[j]) ? l_data[i++] : r_data[j++];
+           if(l_data[i] <= r_data[j]){
+            sub_data[k++] = l_data[i++];
+           }else {
+            sub_data[k++] = r_data[j++];
+            inv_count += (l_size - i);
+           }
         }
         while (i < l_size)
             sub_data[k++] = l_data[i++];
@@ -39,12 +34,12 @@ void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int midd
             sub_data[k++] = r_data[j++];
 }
 
-void MSort(std::vector<int>& sub_data,unsigned int left_index, unsigned int right_index){
+void MSort(std::vector<int>& sub_data,unsigned int left_index, unsigned int right_index,int& inv_count){
     if(left_index < right_index){
         int middle_index = left_index + (right_index-left_index) /2;
-        MSort(sub_data,left_index,middle_index);
-        MSort(sub_data,middle_index+1,right_index);
-        Merge(sub_data,left_index,middle_index,right_index);
+        MSort(sub_data,left_index,middle_index,inv_count);
+        MSort(sub_data,middle_index+1,right_index,inv_count);
+        Merge(sub_data,left_index,middle_index,right_index,inv_count);
     }
     
 };
@@ -55,8 +50,9 @@ int main()
     for(const auto& x : data)
         std::cout << x << ",";
     std::cout << "\nStarting the sort ...\n";
-    MSort(data,0,data.size()-1);
+    int inv_count = 0;
+    MSort(data,0,data.size()-1,inv_count);
     for(const auto& x : data)
         std::cout << x << ",";  
-    std::cout<< "\nFinished" << std::endl;
+    std::cout<< "\nFinished : Inversions " << inv_count << std::endl;
 }
