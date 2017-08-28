@@ -1,8 +1,9 @@
 // Example program
 #include <iostream>
 #include <vector>
+#include <fstream>
 
-void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int middle_index, unsigned int right_index, int& inv_count){
+void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int middle_index, unsigned int right_index, long long& inv_count){
     
        const int l_size = middle_index - left_index + 1;
        const int r_size = right_index - middle_index;
@@ -34,7 +35,7 @@ void Merge(std::vector<int>& sub_data,unsigned int left_index, unsigned int midd
             sub_data[k++] = r_data[j++];
 }
 
-void MSort(std::vector<int>& sub_data,unsigned int left_index, unsigned int right_index,int& inv_count){
+void MSort(std::vector<int>& sub_data,unsigned int left_index, unsigned int right_index, long long& inv_count){
     if(left_index < right_index){
         int middle_index = left_index + (right_index-left_index) /2;
         MSort(sub_data,left_index,middle_index,inv_count);
@@ -46,13 +47,22 @@ void MSort(std::vector<int>& sub_data,unsigned int left_index, unsigned int righ
 
 int main()
 {
-    std::vector<int> data = {38,27,43,3,9,82,10};
-    for(const auto& x : data)
-        std::cout << x << ",";
-    std::cout << "\nStarting the sort ...\n";
-    int inv_count = 0;
+   // Test Data for sanity.
+   //std::vector<int> data = {38,27,43,3,9,82,10};
+   //for(const auto& x : data)
+   //    std::cout << x << ",";
+   //std::cout << "\nStarting the sort ...\n";
+   
+   std::vector<int> data;
+   std::ifstream ifs("IntegerArray.txt");
+   int x;
+   while(ifs>>x){
+      data.push_back(x);
+   }
+    std::cout << data.size();
+    long long inv_count = 0;
     MSort(data,0,data.size()-1,inv_count);
-    for(const auto& x : data)
-        std::cout << x << ",";  
+    //for(const auto& x : data)
+    //    std::cout << x << ",";  
     std::cout<< "\nFinished : Inversions " << inv_count << std::endl;
 }
