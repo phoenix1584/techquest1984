@@ -13,7 +13,8 @@ void Printer(std::vector<int>& data,std::string comment= "None"){
 #endif
 }
 
-int Partition(std::vector<int>& data,int left, int right){
+int Partition(std::vector<int>& data,int left, int right,long long& count){
+	count += (right-left -1 ); 	
 	int pivot = data[left];
 	int i = left + 1;
 	int tmp;
@@ -32,14 +33,14 @@ int Partition(std::vector<int>& data,int left, int right){
 
 void QSort(std::vector<int>& data,int left, int right,long long& count){
 	if(left < right){
-		count += (right-left + 1 ); 	
-		int part = Partition(data,left,right);
+		int part = Partition(data,left,right,count);
 		QSort(data,left,part-1,count);
 		QSort(data,part+1,right,count);
 	}
 }
 
-int RPartition(std::vector<int>& data,int left, int right){
+int RPartition(std::vector<int>& data,int left, int right,long long& count){
+	count += (right-left); 	
 	int pivot = data[right];
 	int i = left - 1;
 	int tmp;
@@ -53,21 +54,21 @@ int RPartition(std::vector<int>& data,int left, int right){
 	}
 	data[right] = data[i+1];
 	data[i+1] = pivot;
-	Printer(data,std::to_string(pivot));
 	return i+1; // New Partition boundary.
 }
 
 void RQSort(std::vector<int>& data,int left, int right,long long& count){
 	if(left < right){
-		count += (right-left); 	
-		int part = RPartition(data,left,right);
+		int part = RPartition(data,left,right,count);
 		RQSort(data,left,part-1,count);
 		RQSort(data,part+1,right,count);
 	}
 }
 
-int MPartition(std::vector<int>& data,int left, int right){
-	int mid = (left + (right-left)/2);
+int MPartition(std::vector<int>& data,int left, int right,long long& count){
+	int len = right - left ;
+	count += (len - 1); 	
+	int mid = (left + (len + (len%2))/2 );
 	int tmp;
         if((data[mid] > data[left] && data[mid] < data[right]) || 
 	    (data[mid] < data[left] && data[mid] > data[right]) ){
@@ -94,13 +95,13 @@ int MPartition(std::vector<int>& data,int left, int right){
 	}
 	data[left] = data[i-1];
 	data[i-1] = pivot;
+	Printer(data, std::to_string(pivot));
 	return i-1; // New Partition boundary.
 }
 
 void MQSort(std::vector<int>& data,int left, int right,long long& count){
 	if(left < right){
-		count += (right-left - 1); 	
-		int part = MPartition(data,left,right);
+		int part = MPartition(data,left,right,count);
 		MQSort(data,left,part-1,count);
 		MQSort(data,part+1,right,count);
 	}
@@ -117,7 +118,7 @@ int main()
 			data.push_back(x);
 		}
 		Printer(data,"Unsorted");
-		long long inv_count = 0;
+		long long inv_count = 1;
 		QSort(data,0,data.size(),inv_count);
 		Printer(data,"Sorted");
 		std::cout << "Count of comparisons First Pivot : " << inv_count << "\n\n";
@@ -143,7 +144,7 @@ int main()
 			data.push_back(x);
 		}
 		Printer(data,"Unsorted");
-		long long inv_count = 0;
+		long long inv_count = 1;
 		MQSort(data,0,data.size(),inv_count);
 		Printer(data,"Sorted");
 		std::cout << "Count of comparisons Median Pivot : " << inv_count << "\n\n";
