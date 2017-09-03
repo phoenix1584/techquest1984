@@ -5,6 +5,19 @@
 #include <vector>
 #include <algorithm>
 
+void DPrinter(std::vector<int>& data,int left, int right,int part){
+#ifndef DEBUG
+	for(int i=left ; i < part ; i++){
+		std::cout << data[i] << ",";
+	}
+	std::cout << " =========  " ;
+	for(int i=part+1 ; i <= right ; i++){
+		std::cout << data[i] << ",";
+	}
+	std::cout << "\n";
+#endif
+}
+
 void Printer(std::vector<int>& data,std::string comment= "None"){
 #ifndef DEBUG
 	for(const auto& x : data)
@@ -13,39 +26,12 @@ void Printer(std::vector<int>& data,std::string comment= "None"){
 #endif
 }
 
-int Partition(std::vector<int>& data,int left, int right,long long& count){
-	count += (right-left -1 ); 	
-	int pivot = data[left];
-	int i = left + 1;
-	int tmp;
-	for(int j = left + 1 ; j < right ; ++j){
-		if(data[j] < pivot){
-			tmp = data[i];
-			data[i] = data[j];
-			data[j] = tmp;
-			i++;
-		}    
-	}
-	data[left] = data[i-1];
-	data[i-1] = pivot;
-	return i-1; // New Partition boundary.
-}
-
-void QSort(std::vector<int>& data,int left, int right,long long& count){
-	if(left < right){
-		int part = Partition(data,left,right,count);
-		QSort(data,left,part-1,count);
-		QSort(data,part+1,right,count);
-	}
-}
-
 int RPartition(std::vector<int>& data,int left, int right,long long& count){
-	count += (right-left); 	
 	int pivot = data[right];
 	int i = left - 1;
 	int tmp;
 	for(int j = left ; j < right ; ++j){
-		if(data[j] <= pivot){
+		if(data[j] < pivot){
 			i++;
 			tmp = data[i];
 			data[i] = data[j];
@@ -59,6 +45,7 @@ int RPartition(std::vector<int>& data,int left, int right,long long& count){
 
 void RQSort(std::vector<int>& data,int left, int right,long long& count){
 	if(left < right){
+		count += (right-left ); 	
 		int part = RPartition(data,left,right,count);
 		RQSort(data,left,part-1,count);
 		RQSort(data,part+1,right,count);
@@ -66,9 +53,8 @@ void RQSort(std::vector<int>& data,int left, int right,long long& count){
 }
 
 int MPartition(std::vector<int>& data,int left, int right,long long& count){
-	int len = right - left ;
-	count += (len - 1); 	
-	int mid = (left + (len + (len%2))/2 );
+	int len = right - left  + 1;
+	int mid = (left + (len + (len%2))/2 - 1 );
 	int tmp;
         if((data[mid] > data[left] && data[mid] < data[right]) || 
 	    (data[mid] < data[left] && data[mid] > data[right]) ){
@@ -85,7 +71,7 @@ int MPartition(std::vector<int>& data,int left, int right,long long& count){
 	int pivot = data[left];
 
 	int i = left + 1;
-	for(int j = left + 1 ; j < right ; ++j){
+	for(int j = left + 1 ; j <= right ; ++j){
 		if(data[j] < pivot){
 			tmp = data[i];
 			data[i] = data[j];
@@ -95,17 +81,45 @@ int MPartition(std::vector<int>& data,int left, int right,long long& count){
 	}
 	data[left] = data[i-1];
 	data[i-1] = pivot;
-	Printer(data, std::to_string(pivot));
+	Printer(data, std::to_string(len));
 	return i-1; // New Partition boundary.
 }
 
 void MQSort(std::vector<int>& data,int left, int right,long long& count){
 	if(left < right){
+		count += (right - left); 	
 		int part = MPartition(data,left,right,count);
 		MQSort(data,left,part-1,count);
 		MQSort(data,part+1,right,count);
 	}
 }
+
+int Partition(std::vector<int>& data,int left, int right,long long& count){
+	int pivot = data[left];
+	int i = left + 1;
+	int tmp;
+	for(int j = left + 1 ; j <= right ; ++j){
+		if(data[j] < pivot){
+			tmp = data[i];
+			data[i] = data[j];
+			data[j] = tmp;
+			i++;
+		}    
+	}
+	data[left] = data[i-1];
+	data[i-1] = pivot;
+	return i-1; // New Partition boundary.
+}
+
+void QSort(std::vector<int>& data,int left, int right,long long& count){
+	if(left < right){
+		count += (right-left );
+		int part = Partition(data,left,right,count);
+		QSort(data,left,part-1,count);
+		QSort(data,part+1,right,count);
+	}
+}
+
 
 int main()
 {
@@ -118,8 +132,8 @@ int main()
 			data.push_back(x);
 		}
 		Printer(data,"Unsorted");
-		long long inv_count = 1;
-		QSort(data,0,data.size(),inv_count);
+		long long inv_count = 0;
+		QSort(data,0,data.size()-1,inv_count);
 		Printer(data,"Sorted");
 		std::cout << "Count of comparisons First Pivot : " << inv_count << "\n\n";
 	}
@@ -144,8 +158,8 @@ int main()
 			data.push_back(x);
 		}
 		Printer(data,"Unsorted");
-		long long inv_count = 1;
-		MQSort(data,0,data.size(),inv_count);
+		long long inv_count = 0;
+		MQSort(data,0,data.size()-1,inv_count);
 		Printer(data,"Sorted");
 		std::cout << "Count of comparisons Median Pivot : " << inv_count << "\n\n";
 	}
