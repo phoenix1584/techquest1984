@@ -45,7 +45,7 @@ int RPartition(std::vector<int>& data,int left, int right,long long& count){
 
 void RQSort(std::vector<int>& data,int left, int right,long long& count){
 	if(left < right){
-		count += (right-left ); 	
+		count += (right-left -1 ); 	
 		int part = RPartition(data,left,right,count);
 		RQSort(data,left,part-1,count);
 		RQSort(data,part+1,right,count);
