@@ -27,25 +27,42 @@ void Printer(std::vector<int>& data,std::string comment= "None"){
 }
 
 int RPartition(std::vector<int>& data,int left, int right,long long& count){
-	int pivot = data[right];
-	int i = left - 1;
-	int tmp;
-	for(int j = left ; j < right ; ++j){
+	//int pivot = data[right];
+	//int i = left - 1;
+	//int tmp;
+	//for(int j = left ; j < right ; j++){
+	//	if(data[j] < pivot){
+	//		i++;
+	//		tmp = data[i];
+	//		data[i] = data[j];
+	//		data[j] = tmp;
+	//	}    
+	//}
+	//data[right] = data[i+1];
+	//data[i+1] = pivot;
+	//return i+1; // New Partition boundary.
+	int tmp = data[left];
+	data[left] = data[right];
+	data[right]=tmp;
+		
+	int pivot = data[left];
+	int i = left + 1;
+	for(int j = left + 1 ; j <= right ; ++j){
 		if(data[j] < pivot){
-			i++;
 			tmp = data[i];
 			data[i] = data[j];
 			data[j] = tmp;
+			i++;
 		}    
 	}
-	data[right] = data[i+1];
-	data[i+1] = pivot;
-	return i+1; // New Partition boundary.
+	data[left] = data[i-1];
+	data[i-1] = pivot;
+	return i-1; // New Partition boundary.
 }
 
 void RQSort(std::vector<int>& data,int left, int right,long long& count){
 	if(left < right){
-		count += (right-left -1 ); 	
+		count += (right-left) ; 	
 		int part = RPartition(data,left,right,count);
 		RQSort(data,left,part-1,count);
 		RQSort(data,part+1,right,count);
@@ -81,7 +98,6 @@ int MPartition(std::vector<int>& data,int left, int right,long long& count){
 	}
 	data[left] = data[i-1];
 	data[i-1] = pivot;
-	Printer(data, std::to_string(len));
 	return i-1; // New Partition boundary.
 }
 
