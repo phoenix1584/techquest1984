@@ -1,37 +1,36 @@
-// C++ Implementation of Kosaraju's algorithm to print all SCCs
+// C++ Implementation of Kosaraju's algorithm
 #include <iostream>
 #include <list>
 #include <stack>
-using namespace std;
+//using namespace std;
 
 class Graph
 {
-	int V; // No. of vertices
-	list<int> *adj; // An array of adjacency lists
+				int m_vertices; // No. of vertices
+				std::list<int> *adj; // An array of adjacency lists
 
-	// Fills Stack with vertices (in increasing order of finishing
-	// times). The top element of stack has the maximum finishing 
-	// time
-	void fillOrder(int v, bool visited[], stack<int> &Stack);
+				// Fills Stack with vertices (in increasing order of finishing
+				// times). The top element of stack has the maximum finishing 
+				// time
+				void fillOrder(int v, bool visited[], std::stack<int> &Stack);
 
-	// A recursive function to print DFS starting from v
-	void DFSUtil(int v, bool visited[]);
+				// A recursive function to print DFS starting from v
+				void DFSUtil(int v, bool visited[]);
 	public:
-	Graph(int V);
-	void addEdge(int v, int w);
+				Graph(int V);
+				void addEdge(int v, int w);
 
-	// The main function that finds and prints strongly connected
-	// components
-	void printSCCs();
+				// The main function that finds and prints strongly connected
+				// components
+				void printSCCs();
 
-	// Function that returns reverse (or transpose) of this graph
-	Graph getTranspose();
+				// Function that returns reverse (or transpose) of this graph
+				Graph getTranspose();
 };
 
 Graph::Graph(int V)
-{
-	this->V = V;
-	adj = new list<int>[V];
+				:m_vertices(V){
+	adj = new std::list<int>[m_vertices];
 }
 
 // A recursive function to print DFS starting from v
@@ -39,24 +38,22 @@ void Graph::DFSUtil(int v, bool visited[])
 {
 	// Mark the current node as visited and print it
 	visited[v] = true;
-	cout << v << " ";
+	std::cout << v << " ";
 
 	// Recur for all the vertices adjacent to this vertex
-	list<int>::iterator i;
-	for (i = adj[v].begin(); i != adj[v].end(); ++i)
+	for (std::list<int>::iterator i = adj[v].begin(); i != adj[v].end(); ++i){
 		if (!visited[*i])
 			DFSUtil(*i, visited);
+	}
 }
 
 Graph Graph::getTranspose()
 {
-	Graph g(V);
-	for (int v = 0; v < V; v++)
+	Graph g(m_vertices);
+	for (int v = 0; v < m_vertices; v++)
 	{
 		// Recur for all the vertices adjacent to this vertex
-		list<int>::iterator i;
-		for(i = adj[v].begin(); i != adj[v].end(); ++i)
-		{
+		for(std::list<int>::iterator i = adj[v].begin(); i != adj[v].end(); ++i){
 			g.adj[*i].push_back(v);
 		}
 	}
@@ -68,14 +65,13 @@ void Graph::addEdge(int v, int w)
 	adj[v].push_back(w); // Add w to v.s list.
 }
 
-void Graph::fillOrder(int v, bool visited[], stack<int> &Stack)
+void Graph::fillOrder(int v, bool visited[], std::stack<int> &Stack)
 {
 	// Mark the current node as visited and print it
 	visited[v] = true;
 
 	// Recur for all the vertices adjacent to this vertex
-	list<int>::iterator i;
-	for(i = adj[v].begin(); i != adj[v].end(); ++i)
+	for(std::list<int>::iterator i = adj[v].begin(); i != adj[v].end(); ++i)
 		if(!visited[*i])
 			fillOrder(*i, visited, Stack);
 
@@ -87,15 +83,15 @@ void Graph::fillOrder(int v, bool visited[], stack<int> &Stack)
 // components
 void Graph::printSCCs()
 {
-	stack<int> Stack;
+	std::stack<int> Stack;
 
 	// Mark all the vertices as not visited (For first DFS)
-	bool *visited = new bool[V];
-	for(int i = 0; i < V; i++)
+	bool *visited = new bool[m_vertices];
+	for(int i = 0; i < m_vertices; i++)
 		visited[i] = false;
 
 	// Fill vertices in stack according to their finishing times
-	for(int i = 0; i < V; i++)
+	for(int i = 0; i < m_vertices; i++)
 		if(visited[i] == false)
 			fillOrder(i, visited, Stack);
 
@@ -103,7 +99,7 @@ void Graph::printSCCs()
 	Graph gr = getTranspose();
 
 	// Mark all the vertices as not visited (For second DFS)
-	for(int i = 0; i < V; i++)
+	for(int i = 0; i < m_vertices; i++)
 		visited[i] = false;
 
 	// Now process all vertices in order defined by Stack
@@ -117,7 +113,7 @@ void Graph::printSCCs()
 		if (visited[v] == false)
 		{
 			gr.DFSUtil(v, visited);
-			cout << endl;
+			std::cout << std::endl;
 		}
 	}
 }
@@ -140,7 +136,7 @@ int main()
 	g.addEdge(9,3);
 
 
-	cout << "Following are strongly connected components in "
+	std::cout << "Following are strongly connected components in "
 		"given graph \n";
 	g.printSCCs();
 
