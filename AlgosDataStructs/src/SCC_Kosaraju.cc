@@ -7,6 +7,8 @@
 #include <string>
 #include <algorithm>
 
+// #FIXME : Could bools be replaced by bitset ?? Will they save space ??
+
 class Graph
 {
 				int m_vertices; // No. of vertices
@@ -34,8 +36,8 @@ class Graph
 
 Graph::Graph(int V)
 				:m_vertices(V){
-	adj = new std::list<int>[m_vertices];
-}
+								adj = new std::list<int>[m_vertices];
+				}
 
 // A recursive function to print DFS starting from v
 void Graph::DFSUtil(int v, bool visited[],int& v_count)
@@ -45,10 +47,10 @@ void Graph::DFSUtil(int v, bool visited[],int& v_count)
 	//std::cout << v << " ";
   ++v_count;
 
-	// Recur for all the vertices adjacent to this vertex
-	for (std::list<int>::iterator i = adj[v].begin(); i != adj[v].end(); ++i){
-		if (!visited[*i])
-			DFSUtil(*i, visited,v_count);
+	// Recurse for all the vertices adjacent to this vertex
+	for (auto& i : adj[v]){
+		if (!visited[i])
+			DFSUtil(i, visited,v_count);
 	}
 }
 
@@ -56,7 +58,7 @@ Graph Graph::getTranspose()
 {
 	Graph g(m_vertices);
 	for (int v = 0; v < m_vertices; v++){
-		// Recur for all the vertices adjacent to this vertex
+		// Recurse for all the vertices adjacent to this vertex
 		for(auto i : adj[v]){
 			g.adj[i].push_back(v);
 		}
@@ -74,7 +76,7 @@ void Graph::fillOrder(int v, bool visited[], std::stack<int> &Stack)
 	// Mark the current node as visited and print it
 	visited[v] = true;
 
-	// Recur for all the vertices adjacent to this vertex
+	// Recurse for all the vertices adjacent to this vertex
 	for(auto i : adj[v]){
 		if(!visited[i])
 			fillOrder(i, visited, Stack);
@@ -122,11 +124,11 @@ void Graph::printSCCs()
 			//std::cout << std::endl;
 		}
 	}
-	std::cout << "SCC Counts\n";
   m_scc.erase(m_scc.end()-1);
+	std::cout << "SCC Counts descending order. Total : " << m_scc.size() << "\n";
   std::sort(m_scc.rbegin(),m_scc.rend());
-  for(auto& sc : m_scc)
-		std::cout << sc << "\n";
+  for(auto i : m_scc)
+		std::cout << i << "\n";
 }
 
 // Driver program to test above functions
