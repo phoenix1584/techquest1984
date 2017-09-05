@@ -2,12 +2,16 @@
 #include <iostream>
 #include <list>
 #include <stack>
-//using namespace std;
+#include <vector>
+#include <fstream>
+#include <string>
+#include <algorithm>
 
 class Graph
 {
 				int m_vertices; // No. of vertices
 				std::list<int> *adj; // An array of adjacency lists
+				std::vector<int> m_scc;				
 
 				// Fills Stack with vertices (in increasing order of finishing
 				// times). The top element of stack has the maximum finishing 
@@ -15,7 +19,7 @@ class Graph
 				void fillOrder(int v, bool visited[], std::stack<int> &Stack);
 
 				// A recursive function to print DFS starting from v
-				void DFSUtil(int v, bool visited[]);
+				void DFSUtil(int v, bool visited[],int& v_count);
 	public:
 				Graph(int V);
 				void addEdge(int v, int w);
@@ -34,27 +38,27 @@ Graph::Graph(int V)
 }
 
 // A recursive function to print DFS starting from v
-void Graph::DFSUtil(int v, bool visited[])
+void Graph::DFSUtil(int v, bool visited[],int& v_count)
 {
 	// Mark the current node as visited and print it
 	visited[v] = true;
-	std::cout << v << " ";
+	//std::cout << v << " ";
+  ++v_count;
 
 	// Recur for all the vertices adjacent to this vertex
 	for (std::list<int>::iterator i = adj[v].begin(); i != adj[v].end(); ++i){
 		if (!visited[*i])
-			DFSUtil(*i, visited);
+			DFSUtil(*i, visited,v_count);
 	}
 }
 
 Graph Graph::getTranspose()
 {
 	Graph g(m_vertices);
-	for (int v = 0; v < m_vertices; v++)
-	{
+	for (int v = 0; v < m_vertices; v++){
 		// Recur for all the vertices adjacent to this vertex
-		for(std::list<int>::iterator i = adj[v].begin(); i != adj[v].end(); ++i){
-			g.adj[*i].push_back(v);
+		for(auto i : adj[v]){
+			g.adj[i].push_back(v);
 		}
 	}
 	return g;
@@ -71,9 +75,10 @@ void Graph::fillOrder(int v, bool visited[], std::stack<int> &Stack)
 	visited[v] = true;
 
 	// Recur for all the vertices adjacent to this vertex
-	for(std::list<int>::iterator i = adj[v].begin(); i != adj[v].end(); ++i)
-		if(!visited[*i])
-			fillOrder(*i, visited, Stack);
+	for(auto i : adj[v]){
+		if(!visited[i])
+			fillOrder(i, visited, Stack);
+	}
 
 	// All vertices reachable from v are processed by now, push v 
 	Stack.push(v);
@@ -84,7 +89,7 @@ void Graph::fillOrder(int v, bool visited[], std::stack<int> &Stack)
 void Graph::printSCCs()
 {
 	std::stack<int> Stack;
-
+  
 	// Mark all the vertices as not visited (For first DFS)
 	bool *visited = new bool[m_vertices];
 	for(int i = 0; i < m_vertices; i++)
@@ -108,37 +113,53 @@ void Graph::printSCCs()
 		// Pop a vertex from stack
 		int v = Stack.top();
 		Stack.pop();
-
+		int v_count = 0;
 		// Print Strongly connected component of the popped vertex
 		if (visited[v] == false)
 		{
-			gr.DFSUtil(v, visited);
-			std::cout << std::endl;
+			gr.DFSUtil(v, visited,v_count);
+			m_scc.push_back(v_count);
+			//std::cout << std::endl;
 		}
 	}
+	std::cout << "SCC Counts\n";
+  m_scc.erase(m_scc.end()-1);
+  std::sort(m_scc.rbegin(),m_scc.rend());
+  for(auto& sc : m_scc)
+		std::cout << sc << "\n";
 }
 
 // Driver program to test above functions
-int main()
+int main(int argc, char * argv[])
 {
-	// Create a graph given in the above diagram
-	Graph g(11);
-	g.addEdge(1,4);
-	g.addEdge(2,8);
-	g.addEdge(3,6);
-	g.addEdge(4,7);
-	g.addEdge(5,2);
-	g.addEdge(6,9);
-	g.addEdge(7,1);
-	g.addEdge(8,5);
-	g.addEdge(8,6);
-	g.addEdge(9,7);
-	g.addEdge(9,3);
+	if(argc != 3){
+		std::cout << "Usage : ./SCC_Kosaraju <input_file_name> <Number of vertices> \n"; 
+		return 1;
+	}
+	std::ifstream ifs(argv[1]);
+	int v,w;
+	Graph g(std::stoi(std::string(argv[2])));
+  if(ifs){
+		while(ifs >> v >> w){
+				g.addEdge(v,w);	
+		}
+	}
+  
+	// TEST DATA FOR DEBUGGING : Answer : 3,3,3 
+	//Graph g(10);
+	//g.addEdge(1,4);
+	//g.addEdge(2,8);
+	//g.addEdge(3,6);
+	//g.addEdge(4,7);
+	//g.addEdge(5,2);
+	//g.addEdge(6,9);
+	//g.addEdge(7,1);
+	//g.addEdge(8,5);
+	//g.addEdge(8,6);
+	//g.addEdge(9,7);
+	//g.addEdge(9,3);
 
-
-	std::cout << "Following are strongly connected components in "
-		"given graph \n";
+	std::cout << "Following are strongly connected components in given graph \n";
 	g.printSCCs();
-
 	return 0;
 }
