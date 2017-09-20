@@ -1,0 +1,12 @@
+[Unit]
+Description=Test service for systemd macros in spec files.
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/usr/bin/touch /var/run/test_test_service_1_10.token 
+
+[Install]
+WantedBy=multi-user.target
+
