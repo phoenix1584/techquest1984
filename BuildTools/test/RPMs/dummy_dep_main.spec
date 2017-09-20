@@ -2,8 +2,8 @@
 Name: dummy_dependency_main
 Version: %{dummy_main_version} 
 Release: 0
-License: UFO Moviez all rights reserved.
-Packager: ufo
+License: test all rights reserved.
+Packager: test
 Group: Development/Tools
 Summary: This is dummy dependency base package.
 #BuildArch: noarch

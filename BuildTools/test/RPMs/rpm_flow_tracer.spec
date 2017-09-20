@@ -1,5 +1,4 @@
 #rpmbuild -v -bb --define "_topdir /tmp" --define "version <Major.Minor.Patch>" rpm_flow_tracer.spec
-#rpmbuild -bb --define "_topdir /tmp" --define "version_path /CodeBase/CBUpdate/rpm_build/test/"
 Name: rpmflowtracer 
 Version: %{version} 
 Release: 0
