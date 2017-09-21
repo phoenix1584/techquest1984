@@ -1,16 +1,16 @@
 #rpmbuild -v -bb --define "_topdir /tmp" --define "version <Major.Minor.Patch>" rpm_flow_tracer.spec
+%include HelperMacros.def 
 Name: rpmflowtracer 
-Version: %{version} 
+Version: 0.0.7 
 Release: 0
-License: Test Licence.
-Packager: Test 
+License: Creative commons. 
+Packager: jinx 
 Group: Development/Tools
 Summary: Test package for tracing RPM workflow.
 #BuildArch: i686 
 
 #BuildRequires: %{nil}
 BuildRoot: %{name}-%{version}
-%define log_file /tmp/rpm_trace.txt
 
 %global debug_package %{nil}
 
@@ -24,42 +24,41 @@ BuildRoot: %{name}-%{version}
 %files
 
 %pretrans
-rm -f %{log_file}
-echo "[START] $(date) %{version} pretrans directive" >> %{log_file}
+%TracerMacro "[START]_pretrans_directive" 
 
 %pre
-echo "$(date) %{version} pre directive" >> %{log_file}
+%TracerMacro "pre_directive" 
 
 %install
 
 %files
 
 %post
-echo "$(date) %{version} post directive" >> %{log_file}
+%TracerMacro "post_directive" 
 
-%triggerin -- cbsm 
-echo "$(date) %{version} triggerin1 directive" >> %{log_file}
+%triggerin -- dummy_dependency_base 
+%TracerMacro "triggerin1_directive" 
 
-%triggerin -- cbsm
-echo "$(date) %{version} triggerin2 directive" >> %{log_file}
+%triggerin -- rpmflowtracer < %{version}
+%TracerMacro "triggerin2_directive" 
 
-%triggerun -- cbsm
-echo "$(date) %{version} triggerun1 directive" >> %{log_file}
+%triggerun --  dummy_dependency_base
+%TracerMacro "triggerun1_directive" 
 
-%triggerun -- cbsm
-echo "$(date) %{version} triggerun2 directive" >> %{log_file}
+%triggerun --  rpmflowtracer < %{version}
+%TracerMacro "triggerun2_directive" 
 
 %preun 
-echo "$(date) %{version} preun directive" >> %{log_file}
+%TracerMacro "preun_directive" 
 
 %postun
-echo "$(date) %{version} postun directive" >> %{log_file}
+%TracerMacro "postun_directive" 
 
-%triggerpostun -- cbsm
-echo "$(date) %{version} triggerpostun1 directive" >> %{log_file}
+%triggerpostun --  dummy_dependency_base
+%TracerMacro "triggerpostun1_directive" 
 
-%triggerpostun -- cbsm
-echo "$(date) %{version} triggerpostun2 directive" >> %{log_file}
+%triggerpostun --  rpmflowtracer < %{version}
+%TracerMacro "triggerpostun2_directive" 
 
 %posttrans
-echo "[END] $(date) %{version} posttrans directive" >> %{log_file}
+%TracerMacro "[END]_posttrans_directive" 
