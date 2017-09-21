@@ -1,0 +1,3 @@
+%define log_file /tmp/rpm_trace.txt
+%define TracerMacro() (echo "[USR_TRACE]$(date) %{name}-%{version}-%{release} : Action : %1") || :
+%define DeployTraceMacro() (echo "[USR_DBG] %1 of %{name}-%{version}-%{release} : %2") || :
