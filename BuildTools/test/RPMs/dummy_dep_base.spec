@@ -29,8 +29,10 @@ BuildRoot: /CodeBase/CBUpdate/rpm_build/cbsoftware_pkg/tmp/%{name}-%{version}
 %DeployTraceMacro Install_or_upgrade $1
 
 %post
+%DeployTraceMacro Install_or_upgrade $1
 
 %preun
 %DeployTraceMacro Downgrade_or_remove $1
 
 %postun
+%DeployTraceMacro Downgrade_or_remove $1

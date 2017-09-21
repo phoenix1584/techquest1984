@@ -1,14 +1,14 @@
-%include %{version_path}/versions.spec
+%include HelperMacros.def
 Name: dummy_dependency_main
-Version: %{dummy_main_version} 
+Version: 0.0.1 
 Release: 0
-License: test all rights reserved.
-Packager: test
+License: Creative Commons 
+Packager: jinx 
 Group: Development/Tools
 Summary: This is dummy dependency base package.
 #BuildArch: noarch
 
-Requires(pre): dummy_dependency_base >= %{dummy_dependency_base}
+Requires: dummy_dependency_base 
 
 #BuildRequires: %{nil}
 BuildRoot: /CodeBase/CBUpdate/rpm_build/cbsoftware_pkg/tmp/%{name}-%{version}
