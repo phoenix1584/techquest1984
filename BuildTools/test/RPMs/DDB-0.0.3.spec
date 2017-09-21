@@ -1,6 +1,6 @@
 %include HelperMacros.def
 Name: dummy_dependency_base
-Version: 0.0.1 
+Version: 0.0.3 
 Release: 0
 License: creative commons.
 Packager: jinx 

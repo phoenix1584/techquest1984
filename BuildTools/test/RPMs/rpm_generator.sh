@@ -15,38 +15,45 @@
 
 function RPMBuilder(){
 	echo "Builder invoked for spec file $1"
+	rpmbuild -bb --define "_topdir  /home/subodh/CodeBase/rpm_factory" $1
 }
 
+rm -f /tmp/file_*.txt
 #1
 RPMBuilder rpm_flow_tracer.spec 
 
 #2
-echo "DDB-0.0.1" >> /tmp/file_1.txt
+echo "$(date) : DDB-0.0.1" >> /tmp/file_1.txt
+sleep 5
 
 #3
 RPMBuilder DDB-0.0.1.spec
 
 #4 
-echo "DDB-0.0.2" >> /tmp/file_2.txt
+sleep 5
+echo "$(date) : DDB-0.0.2" >> /tmp/file_2.txt
 
 #5
 RPMBuilder DDB-0.0.2.spec
 
 #6
-echo "DDB-0.0.3" >> /tmp/file_1.txt
+sleep 5
+echo "$(date) : DDB-0.0.3" >> /tmp/file_1.txt
 
 #7
 RPMBuilder DDB-0.0.3.spec
 
 #8
-echo "DDB-0.0.4" >> /tmp/file_3.txt
+sleep 5
+echo "$(date) : DDB-0.0.4" >> /tmp/file_3.txt
 
 #9
 RPMBuilder DDB-0.0.4.spec
 
 #10
-echo "DDB-0.0.5" >> /tmp/file_2.txt
-echo "DDB-0.0.5" >> /tmp/file_3.txt
+sleep 5
+echo "$(date) : DDB-0.0.5" >> /tmp/file_2.txt
+echo "$(date) : DDB-0.0.5" >> /tmp/file_3.txt
 
 #11
 RPMBuilder DDB-0.0.5.spec

@@ -1,6 +1,6 @@
 %include HelperMacros.def
 Name: dummy_dependency_base
-Version: 0.0.1 
+Version: 0.0.6 
 Release: 0
 License: creative commons.
 Packager: jinx 
@@ -26,7 +26,7 @@ mkdir -p %{buildroot}/tmp/DDB-tests/
 cp /tmp/file_3.txt %{buildroot}/tmp/DDB-tests/  
 
 %files
-%dir %attr(0644,root,root) /tmp/DB-tests 
+%dir %attr(0644,root,root) /tmp/DDB-tests 
 %attr(0644,root,root) /tmp/DDB-tests/file_3.txt
 
 %pre
