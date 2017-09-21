@@ -1,0 +1,36 @@
+
+* https://fedoraproject.org/wiki/Packaging:Scriptlets
+
+  ** Systemd Macro : Dedicated section : https://fedoraproject.org/wiki/Packaging:Scriptlets?rd=Packaging:ScriptletSnippets#Systemd
+* http://rpm.org/user_doc/lua.html
+* https://rpm-guide.readthedocs.io/en/latest/rpm-guide.html
+* https://rpm-guide.readthedocs.io/en/latest/appendix.html#appendix
+* http://rpm.org/user_doc/macros.html
+* https://fedoraproject.org/wiki/Packaging:RPMMacros?rd=Packaging/RPMMacros
+* http://ftp.rpm.org/max-rpm/ch-rpm-b-command.html
+* https://www.tecmint.com/20-practical-examples-of-rpm-commands-in-linux/
+* http://wiki.rosalab.ru/en/index.php/Building_RPMs_-_Quick_Start
+* Context Marked Dependencies : http://ftp.rpm.org/max-rpm/s1-rpm-depend-manual-dependencies.html
+* Triggers : https://www.ibm.com/developerworks/library/l-rpm2/
+* RPM groups: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sec-Working_with_Package_Groups.html
+* Relocatable packages : http://ftp.rpm.org/max-rpm/s1-rpm-reloc-building-relocatable.html
+* Multiple ownership : https://fedoraproject.org/wiki/Packaging:Guidelines#File_and_Directory_Ownership
+
+  ** Conflicts : https://fedoraproject.org/wiki/Packaging:Conflicts
+** config in spec files : http://people.ds.cam.ac.uk/jw35/docs/rpm_config.html
+
+h4. Systemd
+
+* Presets 
+  
+  ** https://www.freedesktop.org/software/systemd/man/systemd.preset.html
+  ** https://www.freedesktop.org/wiki/Software/systemd/Preset/
+
+
+h4. Yum Transactions
+
+* https://unix.stackexchange.com/questions/78819/what-happens-to-rpm-transaction-when-it-is-interrupted-in-the-middle
+* https://linux.die.net/man/8/yum-complete-transaction
+* https://www.blackmoreops.com/2014/12/01/fixing-there-are-unfinished-transactions-remaining-you-might-consider-running-yum-complete-transaction-first-to-finish-them-in-centos/
+* https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sect-Yum-Transaction_History.html
+Regards
