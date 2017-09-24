@@ -33,4 +33,3 @@ h4. Yum Transactions
 * https://linux.die.net/man/8/yum-complete-transaction
 * https://www.blackmoreops.com/2014/12/01/fixing-there-are-unfinished-transactions-remaining-you-might-consider-running-yum-complete-transaction-first-to-finish-them-in-centos/
 * https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sect-Yum-Transaction_History.html
-Regards
