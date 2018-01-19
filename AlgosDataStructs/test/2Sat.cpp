@@ -1,6 +1,6 @@
 // C++ implementation to find if the given
 // expression is satisfiable using the
-// Kosaraju's Algorithm
+// Kosaraju's Algorithm _ Creude implementation
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -185,8 +185,8 @@ int main()
 
     // The CNF being handled is:
     // '+' implies 'OR' and '*' implies 'AND'
-    // (x1+x2)*(x2’+x3)*(x1’+x2’)*(x3+x4)*(x3’+x5)*
-    // (x4’+x5’)*(x3’+x4)
+    // (x1+x2)*(x2ï¿½+x3)*(x1ï¿½+x2ï¿½)*(x3+x4)*(x3ï¿½+x5)*
+    // (x4ï¿½+x5ï¿½)*(x3ï¿½+x4)
 //    int a[] = {1, -2, -1, 3, -3, -4, -3};
 //    int b[] = {2, 3, -2, 4, 5, -5, 4};
 
