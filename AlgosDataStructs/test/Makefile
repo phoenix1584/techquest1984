@@ -1,5 +1,6 @@
 include ../Makefile.inc
 
+INC_PATH += ../include/
 OBJS := $(patsubst %.cc,%.o,$(wildcard *.cc))
 TARGETS := $(patsubst %.cc,%,$(wildcard *.cc))
 

@@ -19,9 +19,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "TQVector.hh"
-using namespace TechQuest;
-int main(){
-    TQVector<int> test;
-}
+//#include "TQVector.hh"
+//using namespace TechQuest;
+//int main(){
+//    TQVector<int> test;
+//}
 
